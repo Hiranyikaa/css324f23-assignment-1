@@ -49,20 +49,14 @@ def h1(s):
     return res
 
 def h3(s):
-    goal = (1, 2, 3, 4, 5, 6, 7, 8, 0)
     board, _, _ = s
-    h_value = 0
+    goal = (1,2,3,4,5,6,7,8,0)
+    count = 0
 
-    for row in range(3):
-        for col in range(3):
-            tile = board[row * 3 + col]
+    for tile in range(1,9): #1---->8
+        tile_pos , goal_pos = board.index(tile),goal.index(tile)
+        tile_row , tile_col = tile_pos//3 , tile_pos%3
+        goal_row , goal_col = goal_pos//3 , goal_pos%3
 
-            if tile != 0:  # Skip the blank tile
-                # Calculate the target row and column for the current tile
-                target_row = (tile - 1) // 3
-                target_col = (tile - 1) % 3
-
-                # Calculate the Manhattan distance for the tile and add it to h_value
-                h_value += abs(row - target_row) + abs(col - target_col)
-
-    return h_value
+        count+=abs(tile_col-goal_col)+abs(tile_row-goal_row)
+    return count
