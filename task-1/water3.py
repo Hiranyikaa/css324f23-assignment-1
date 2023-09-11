@@ -8,7 +8,7 @@ def is_goal(s):
 def successors(s):
     a, b, c = s
     t = 8 - a
-    if(b > 0 or c > 0) and t > 0:
+    if (b > 0 or c > 0) and t > 0:
         if b > t:
             yield((8, b-t, c), t)
         if c > t:
