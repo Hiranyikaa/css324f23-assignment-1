@@ -1,32 +1,40 @@
 def initial_state():
-    return (8, 0, 0)
+    return (8,0,0)
 
 def is_goal(s):
-    a, b, c = s
-    return a == 4 and b == 4
+
+    return s[0] == 4 and s[1] == 4
 
 def successors(s):
-    x, y, z = s
-    successor_states = []
+    a, b, c = s
+    t = 8 - a
+    if(b > 0 or c > 0) and t > 0:
+        if b > t:
+            yield((8, b-t, c), t)
+        if c > t:
+            yield((8,b,c-t), t)
+        if b < t:
+            yield((a+b,0,c), b)
+        if c < t:
+            yield ((a+c,b,0), c)
+    t = 5 - b
+    if (a > 0 or c >0) and t > 0:
+        if a > t:
+            yield ((a-t,5,c), t)
+        if c > t:
+            yield ((a, 5, c-t), t)
+        if a < t:
+            yield ((0,b+a,c), a)
+        else:
+            yield ((a,b+c,0), c)
 
-    pour_actions = [
-        (0, 1),  # Pour from 8-liter to 5-liter
-        (0, 2),  # Pour from 8-liter to 3-liter
-        (1, 0),  # Pour from 5-liter to 8-liter
-        (1, 2),  # Pour from 5-liter to 3-liter
-        (2, 0),  # Pour from 3-liter to 8-liter
-        (2, 1),  # Pour from 3-liter to 5-liter
-    ]
-    
-    for pour in pour_actions:
-        source, destination = pour
-        if s[source] > 0 and s[destination] < 5:
-            # Calculate the amount to pour
-            amount_to_pour = min(s[source], 5 - s[destination])
-            # Create a new state by pouring water
-            new_state = list(s)
-            new_state[source] -= amount_to_pour
-            new_state[destination] += amount_to_pour
-            successor_states.append(tuple(new_state))
-            
-    return successor_states
+    t = 3 - c
+    if (a > 0 or b > 0) and t > 0:
+        if a > t:
+            yield((a-t,b,3), t)
+        if b > t:
+            yield((a,b-t,3), t)
+        if a < t:
+            yield((0,b,c+a), a)
+        else:
+            yield((a,0,c+b), b)
