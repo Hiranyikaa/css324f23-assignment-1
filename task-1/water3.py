@@ -1,5 +1,5 @@
 def initial_state():
-    return (0, 0, 0)
+    return (8, 0, 0)
 
 def is_goal(s):
     a, b, c = s
