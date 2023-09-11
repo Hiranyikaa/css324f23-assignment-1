@@ -49,14 +49,18 @@ def h1(s):
     return res
 
 def h3(s):
+   # implement this function
     board, _, _ = s
-    goal = (1,2,3,4,5,6,7,8,0)
-    count = 0
-
-    for tile in range(1,9): #1---->8
-        tile_pos , goal_pos = board.index(tile),goal.index(tile)
-        tile_row , tile_col = tile_pos//3 , tile_pos%3
-        goal_row , goal_col = goal_pos//3 , goal_pos%3
-
-        count+=abs(tile_col-goal_col)+abs(tile_row-goal_row)
-    return count
+    res = 0
+    goal = (1, 2, 3, 4, 5, 6, 7, 8, 0)
+    for idx in range(3):
+        for ind in range(3):
+            tile = board[idx*3 + ind]
+            if tile != 0:
+                goal_index = goal.index(tile)
+                row, col = goal_index//3 , goal_index % 3
+                if (idx != row):
+                    res += 1
+                if (ind != col):
+                    res += 1
+    return res
