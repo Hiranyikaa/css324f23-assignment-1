@@ -50,5 +50,18 @@ def h1(s):
 
 def h3(s):
     # implement this function
+    goal = (1, 2, 3, 4, 5, 6, 7, 8, 0)
     board, _, _ = s
-    return 0
+    n = len(board)
+
+    row_count = 0
+    col_count = 0
+
+    for i in range(n):
+        for j in range(n):
+            if board[i * n + j] != goal[i * n + j]:
+                # Tile is not in its target position
+                # Calculate row and column distance
+                row_count += abs(i - goal.index(board[i * n + j]) // n)
+                col_count += abs(j - goal.index(board[i * n + j]) % n)
+    return row_count + col_count
