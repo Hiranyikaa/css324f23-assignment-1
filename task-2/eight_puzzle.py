@@ -53,6 +53,7 @@ def h3(s):
     board, _, _ = s
     res = 0
     goal = (1, 2, 3, 4, 5, 6, 7, 8, 0)
+    
     for idx in range(3):
         for ind in range(3):
             tile = board[idx*3 + ind]
@@ -63,4 +64,5 @@ def h3(s):
                     res += 1
                 if (ind != col):
                     res += 1
+                    
     return res
